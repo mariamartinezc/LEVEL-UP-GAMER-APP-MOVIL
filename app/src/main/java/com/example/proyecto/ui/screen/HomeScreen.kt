@@ -102,7 +102,7 @@ fun ProductoItem(producto: Producto) {
 }
 
 private fun obtieneImagen(context: android.content.Context, imagen: String?): Int {
-    val nombre = imagen?.replace(".png", "") ?: "logocircular"
+    val nombre = imagen?.replace(".png", "") ?.replace(".jpg", "") ?: "logocircular"
     val resourceId = context.resources.getIdentifier(nombre, "drawable", context.packageName)
     return if (resourceId == 0) R.drawable.logocircular else resourceId
 }

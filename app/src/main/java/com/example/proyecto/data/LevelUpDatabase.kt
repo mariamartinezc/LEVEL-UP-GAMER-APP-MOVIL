@@ -75,7 +75,7 @@ abstract class LevelUpDatabase : RoomDatabase() {
                     nombreProducto = "Teclado Mecánico",
                     descripcion = "Teclado mecánico switches blue",
                     precio = 49990.0,
-                    imagen = "teclado.jpg",
+                    imagen = "teclado",
                     stock = 5,
                     categoria = "Periféricos"
                 ),
@@ -83,7 +83,7 @@ abstract class LevelUpDatabase : RoomDatabase() {
                     nombreProducto = "Auriculares",
                     descripcion = "Auriculares gaming con sonido surround",
                     precio = 39990.0,
-                    imagen = "auriculares.jpg",
+                    imagen = "auriculares",
                     stock = 8,
                     categoria = "Audio"
                 ),
@@ -92,7 +92,7 @@ abstract class LevelUpDatabase : RoomDatabase() {
                     nombreProducto = "Monitor 24",
                     descripcion = "Monitor Full HD 144Hz",
                     precio = 199990.0,
-                    imagen = "monitor.jpg",
+                    imagen = "monitor",
                     stock = 3,
                     categoria = "Monitores"
                 ),

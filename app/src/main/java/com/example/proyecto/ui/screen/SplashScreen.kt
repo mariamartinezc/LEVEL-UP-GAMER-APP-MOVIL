@@ -30,7 +30,7 @@ fun SplashScreen(navController: NavController) {
 
     ) {
         Image(
-            painter = painterResource(id = R.drawable.logocircular),
+            painter = painterResource(id = R.drawable.level),
             contentDescription = "Logo LevelUp",
             modifier = Modifier.size(300.dp)
 
