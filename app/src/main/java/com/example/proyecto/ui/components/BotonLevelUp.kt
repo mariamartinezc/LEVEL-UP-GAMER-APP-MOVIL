@@ -27,8 +27,8 @@ fun BotonLevelUp(texto: String, onClickAccion: () -> Unit) {
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFF6A1B9A), // Morado gaming
-                        Color(0xFF4A148C)  // Morado oscuro
+                        Color(0xFF6A1B9A),
+                        Color(0xFF4A148C)
                     )
                 ),
                 shape = RoundedCornerShape(12.dp)
@@ -46,8 +46,8 @@ fun BotonLevelUp(texto: String, onClickAccion: () -> Unit) {
             width = 2.dp,
             brush = Brush.linearGradient(
                 colors = listOf(
-                    Color(0xFF00E5FF), // Cyan neón
-                    Color(0xFF2979FF)  // Azul neón
+                    Color(0xFF00E5FF),
+                    Color(0xFF2979FF)
                 )
             )
         )

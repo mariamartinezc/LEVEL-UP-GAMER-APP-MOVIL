@@ -113,7 +113,7 @@ fun LoginScreen(navController: NavController) {
                     )
                 }
 
-                // Botón
+                // Boton
                 BotonLevelUp(
                     "Ingresar",
                     onClickAccion = {

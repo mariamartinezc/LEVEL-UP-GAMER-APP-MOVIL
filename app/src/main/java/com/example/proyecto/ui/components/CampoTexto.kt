@@ -6,7 +6,9 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun CampoTexto(
@@ -18,7 +20,14 @@ fun CampoTexto(
     OutlinedTextField(
         value = valor,
         onValueChange = onValorCambio,
-        label = { Text(etiqueta) },
+        label = {
+            Text(
+                text = etiqueta,
+                color = Color(0xFF030000),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium
+            )
+        },
         visualTransformation = visualTransformation,
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color(0xFF6A1B9A),

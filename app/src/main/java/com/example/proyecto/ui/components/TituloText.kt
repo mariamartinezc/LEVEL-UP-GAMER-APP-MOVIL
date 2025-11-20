@@ -15,9 +15,9 @@ fun TituloText(titulo: String) {
         style = MaterialTheme.typography.headlineLarge.copy(
             fontSize = 40.sp,
             fontFamily = FontFamily.SansSerif,
-            fontWeight = FontWeight.Black, // Muy grueso
-            color = Color(0xFF35FA02), // Morado gaming
-            letterSpacing = 1.5.sp // Más separación entre letras
+            fontWeight = FontWeight.Black,
+            color = Color(0xFF35FA02),
+            letterSpacing = 1.5.sp //separación entre letras
 
             )
 
