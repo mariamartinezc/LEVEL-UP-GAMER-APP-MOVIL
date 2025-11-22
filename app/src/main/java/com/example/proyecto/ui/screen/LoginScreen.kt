@@ -130,8 +130,19 @@ fun LoginScreen(navController: NavController) {
                             }
                         }
                     }
+
+
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                // Boton registrar
+                BotonLevelUp(
+                    "Registrar",
+                    onClickAccion = {
+                        navController.navigate("registro")
+                    }
                 )
             }
+
         }
     }
 }

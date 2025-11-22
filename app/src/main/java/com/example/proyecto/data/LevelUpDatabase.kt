@@ -58,7 +58,7 @@ abstract class LevelUpDatabase : RoomDatabase() {
                 Usuario(nombre = "admin", contrasena = "1234", correo = "admin@levelup.cl"),
                 Usuario(nombre = "cliente", contrasena = "1234", correo = "cliente@levelup.cl"),
             )
-            usuarios.forEach { usuarioDao.insertar(it) }
+            usuarios.forEach { usuarioDao.insertarUsuario(it) }
 
             // Insertar productos
             val productoDao = db.productoDao()

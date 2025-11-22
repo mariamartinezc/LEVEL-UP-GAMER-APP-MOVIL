@@ -10,8 +10,7 @@ import com.example.proyecto.model.Usuario
 @Dao
 interface UsuarioDao {
     @Insert
-    suspend fun insertar(usuario: Usuario)
-
+    suspend fun insertarUsuario(usuario: Usuario)
     @Update
     suspend fun actualizar(usuario: Usuario)
 
@@ -20,6 +19,10 @@ interface UsuarioDao {
 
     @Query("SELECT * FROM usuarios")
     suspend fun obtenerTodos(): List<Usuario>
+
+    @Query("SELECT * FROM usuarios WHERE nombre = :nombre")
+    suspend fun obtenerUsuarioPorNombre(nombre: String): Usuario?
+
 
     @Query("SELECT * FROM usuarios WHERE id = :id")
     suspend fun obtenerPorId(id: Int): Usuario?
