@@ -10,7 +10,7 @@ interface UsuarioDao {
 //influye los metodos abstractos
     @Insert//por defecto
     suspend fun insertar(usuario: Usuario)
-    @Query("SELECT * FROM usuario")
+    @Query("SELECT * FROM usuarios")
     suspend fun  obtenerUsuarios():List<Usuario>
 //@Query consultas personalizadas
 
