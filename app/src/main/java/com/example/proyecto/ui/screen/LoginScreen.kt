@@ -42,13 +42,14 @@ fun LoginScreen(navController: NavController) {
     var usuario by remember { mutableStateOf("") }
     var contrasena by remember { mutableStateOf("") }
     var mensaje by remember { mutableStateOf("") }
+    var showError by remember { mutableStateOf(false) }
 
     val viewModel: LoginViewModel = viewModel()
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Imagen de fondo
+        //Imagen de fondo
         Image(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "Fondo LevelUp login",
@@ -58,7 +59,7 @@ fun LoginScreen(navController: NavController) {
                 .alpha(0.9f)
         )
 
-        // Contenido principal
+        //Contenido principal
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -66,12 +67,12 @@ fun LoginScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(horizontal = 32.dp)
         ) {
-            // Título
+            //Título
             TituloText("LEVEL UP")
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Subtítulo
+            //Subtítulo
             Text(
                 text = "GAMER STORE",
                 fontSize = 18.sp,
@@ -82,29 +83,39 @@ fun LoginScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(60.dp))
 
-            // Campos de texto
+            //Campos de texto
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.width(280.dp)
             ) {
                 CampoTexto(
                     valor = usuario,
-                    onValorCambio = { usuario = it },
-                    etiqueta = "Usuario"
+                    onValorCambio = { usuario = it
+                        //Limpiar error cuando el usuario empiece a escribir
+                        if (showError) showError = false
+                    },
+                    etiqueta = "Usuario",
+                    esError = showError && usuario.isBlank(),
+                    mensajeError = if (showError && usuario.isBlank()) "Usuario requerido" else ""
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
                 CampoTexto(
                     valor = contrasena,
-                    onValorCambio = { contrasena = it },
+                    onValorCambio = { contrasena = it
+                        //Limpiar error cuando el usuario empiece a escribir
+                        if (showError) showError = false
+                    },
                     etiqueta = "Contraseña",
-                    visualTransformation = PasswordVisualTransformation()
+                    visualTransformation = PasswordVisualTransformation(),
+                    esError = showError && contrasena.isBlank(),
+                    mensajeError = if (showError && contrasena.isBlank()) "Contraseña requerida" else ""
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Mensaje
+                //Mensaje
                 if (mensaje.isNotEmpty()) {
                     Text(
                         text = mensaje,
@@ -113,28 +124,40 @@ fun LoginScreen(navController: NavController) {
                     )
                 }
 
-                // Boton
+                //Boton
                 BotonLevelUp(
                     "Ingresar",
                     onClickAccion = {
+                        //VALIDACION PARA ACTIVAR LAS ANIMACIONES
+                        if (usuario.isBlank() || contrasena.isBlank()) {
+                            showError = true //ESTO ACTIVA LAS ANIMACIONES
+                            mensaje = "Complete todos los campos"
+                            return@BotonLevelUp
+                        }
+
+                        showError = false // Desactivar errores si todo está bien
+
                         CoroutineScope(Dispatchers.IO).launch {
                             val loginExitoso = viewModel.login(usuario, contrasena)
 
                             withContext(Dispatchers.Main) {
                                 if (loginExitoso) {
                                     mensaje = "Login exitoso"
-                                    navController.navigate("home")
+                                    navController.navigate("home/${usuario}") {  // Pasa el usuario como parámetro
+                                        popUpTo("login") { inclusive = true }
+                                    }
                                 } else {
                                     mensaje = "Usuario o contraseña incorrectos"
+                                    showError = true //Mostrar error con animación
                                 }
                             }
                         }
                     }
-
-
                 )
+
                 Spacer(modifier = Modifier.height(20.dp))
-                // Boton registrar
+
+                //Boton registrar
                 BotonLevelUp(
                     "Registrar",
                     onClickAccion = {
@@ -142,7 +165,6 @@ fun LoginScreen(navController: NavController) {
                     }
                 )
             }
-
         }
     }
 }

@@ -139,10 +139,32 @@ fun RegistroProductoScreen(navController: NavController){
                 onClickAccion = {
                     if (nombreProducto.isBlank() || descripcion.isBlank() || precio.isBlank() ||
                         stock.isBlank() || categoria.isBlank()) {
-                        mensajeError = "Complete todos los campos obligatorios"
+                        mensajeError = "Complete todos los campos (*) obligatorios"
+                        return@BotonLevelUp
+                    }
+                    val precioDouble = try {
+                        precio.toDouble()
+                    } catch (e: NumberFormatException) {
+                        mensajeError = "El precio debe ser un numero valido (ej: 29990.0)"
                         return@BotonLevelUp
                     }
 
+                    if (precioDouble <= 0) {
+                        mensajeError = "El precio debe ser mayor a 0"
+                        return@BotonLevelUp
+                    }
+
+                    val stockInt = try {
+                        stock.toInt()
+                    } catch (e: NumberFormatException) {
+                        mensajeError = "El stock debe ser un número entero valido"
+                        return@BotonLevelUp
+                    }
+
+                    if (stockInt < 0) {
+                        mensajeError = "El stock no puede ser negativo"
+                        return@BotonLevelUp
+                    }
                     CoroutineScope(Dispatchers.IO).launch {
                         try {
                             val nuevoProducto = Producto(
@@ -155,10 +177,10 @@ fun RegistroProductoScreen(navController: NavController){
                                 imagen = if (imagen.isBlank()) "logocircular" else imagen
                             )
 
-                            val exito = viewModel.guardarProducto(nuevoProducto)
+                            val cambiosExitosos = viewModel.guardarProducto(nuevoProducto)
 
                             withContext(Dispatchers.Main) {
-                                if (exito) {
+                                if (cambiosExitosos) {
                                     mensajeError = "Producto guardado exitosamente"
                                     // Limpiar campos
                                     nombreProducto = ""
@@ -171,12 +193,18 @@ fun RegistroProductoScreen(navController: NavController){
                                 } else {
                                     mensajeError = "Error al guardar producto"
                                 }
+
+                                if (cambiosExitosos) {
+                                    kotlinx.coroutines.delay(1000)
+                                    navController.popBackStack()
+                                }
                             }
                         } catch (e: Exception) {
                             withContext(Dispatchers.Main) {
                                 mensajeError = "Error: ${e.message}"
                             }
                         }
+
                     }
                 }
             )
@@ -188,6 +216,7 @@ fun RegistroProductoScreen(navController: NavController){
                 texto = "Volver",
                 onClickAccion = {
                     navController.popBackStack() //popBackStack cierra la pantalla actual y vuelve a la anterior
+                    //navController.navigate("home")
                 }
             )
         }

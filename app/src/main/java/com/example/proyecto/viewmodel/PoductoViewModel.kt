@@ -16,6 +16,11 @@ class ProductoViewModel(application: Application): AndroidViewModel(application)
     private val _productos = MutableStateFlow(emptyList<Producto>())
     val productos: StateFlow<List<Producto>> = _productos
 
+    private val _categorias = MutableStateFlow(emptyList<String>())
+    val categorias: StateFlow<List<String>> = _categorias
+
+    //ProductoViewModel
+
     fun cargarProductos() {
         viewModelScope.launch {
             val lista = productoDao.obtenerProductosActivos()
@@ -27,6 +32,30 @@ class ProductoViewModel(application: Application): AndroidViewModel(application)
         viewModelScope.launch {
             val lista = productoDao.obtenerPorCategoria(categoria)
             _productos.value = lista
+        }
+    }
+    suspend fun guardarProducto(producto: Producto): Boolean {
+        return try {
+            //Insertar nuevo producto
+            productoDao.insertarProducto(producto)
+            //Recarga la lista de productos despues de guardar
+            cargarProductos()
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+    //Cargar categorías unicas de la base de datos
+    fun cargarCategorias() {
+        viewModelScope.launch {
+            val todosProductos = productoDao.obtenerProductosActivos()
+            // Obtener categorías unicas y ordenadas
+            val categoriasUnicas = todosProductos
+                .map { it.categoria }
+                .distinct()
+                .sorted()
+            _categorias.value = listOf("Todos") + categoriasUnicas
         }
     }
 }

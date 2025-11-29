@@ -1,10 +1,9 @@
 package com.example.proyecto.model
 
-
-
-data class Carrito (
+data class Carrito(
     val producto: Producto,
-    val cantidad: Int
+    val cantidad: Int,
+    val usuarioNombre: String
 ){
     fun getSubtotal(): Double = producto.precio * cantidad
 }

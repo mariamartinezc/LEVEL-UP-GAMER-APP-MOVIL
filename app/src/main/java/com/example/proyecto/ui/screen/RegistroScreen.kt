@@ -91,7 +91,7 @@ fun RegistroScreen(navController: NavController){
             CampoTexto(
                 valor = nombre,
                 onValorCambio = {nombre = it},
-                etiqueta = "Nombre de usuario"
+                etiqueta = "Nombre de usuario *"
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -99,7 +99,7 @@ fun RegistroScreen(navController: NavController){
             CampoTexto(
                 valor = correo,
                 onValorCambio = {correo = it},
-                etiqueta = "Correo electrónico"
+                etiqueta = "Correo @levelup.cl *"
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -122,7 +122,7 @@ fun RegistroScreen(navController: NavController){
             CampoTexto(
                 valor = contraseña,
                 onValorCambio = {contraseña = it},
-                etiqueta = "Contraseña"
+                etiqueta = "Contraseña *"
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -130,7 +130,7 @@ fun RegistroScreen(navController: NavController){
             CampoTexto(
                 valor = confirmarContraseña,
                 onValorCambio = {confirmarContraseña = it},
-                etiqueta = "Confirmar contraseña"
+                etiqueta = "Confirmar contraseña *"
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -138,8 +138,12 @@ fun RegistroScreen(navController: NavController){
             BotonLevelUp(
                 texto = "Guardar",
                 onClickAccion = {
-                    if (nombre.isBlank() || contraseña.isBlank() || correo.isBlank()) {
-                        mensajeError = "Complete todos los campos obligatorios"
+                    if (nombre.isBlank() || contraseña.isBlank() || correo.isBlank()){
+                        mensajeError = "Complete todos los campos (*) obligatorios"
+                        return@BotonLevelUp
+                    }
+                    if (!correo.contains("@levelup.cl")) {
+                        mensajeError = "Ingresa un correo electrónico válido"
                         return@BotonLevelUp
                     }
 

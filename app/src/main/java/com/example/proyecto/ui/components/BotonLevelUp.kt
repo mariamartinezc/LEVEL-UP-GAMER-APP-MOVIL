@@ -27,7 +27,7 @@ fun BotonLevelUp(texto: String, onClickAccion: () -> Unit) {
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFF6A1B9A),
+                        Color(0xFFBA5DF3),
                         Color(0xFF4A148C)
                     )
                 ),

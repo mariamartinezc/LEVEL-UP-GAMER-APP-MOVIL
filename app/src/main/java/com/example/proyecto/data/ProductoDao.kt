@@ -19,7 +19,7 @@ interface ProductoDao {
     @Query("SELECT * FROM productos WHERE activo = 1")
     suspend fun obtenerProductosActivos(): List<Producto>
 
-    // INSERT para agregar productos
+    //agregar productos
     @Insert
     suspend fun insertarProducto(producto: Producto)
 
