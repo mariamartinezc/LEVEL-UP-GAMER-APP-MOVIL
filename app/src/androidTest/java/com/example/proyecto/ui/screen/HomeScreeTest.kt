@@ -36,7 +36,6 @@ class HomeScreeTest {
         composeGetRule.setContent {
             HomeScreen(
                 navController = rememberNavController(),
-                userNombre = nombreUsuario
             )
         }
 
@@ -47,4 +46,6 @@ class HomeScreeTest {
         composeGetRule.onNodeWithText("Mi Carrito").assertIsDisplayed()
         composeGetRule.onNodeWithText("Cerrar Sesión").assertIsDisplayed()
     }
+
+
 }
