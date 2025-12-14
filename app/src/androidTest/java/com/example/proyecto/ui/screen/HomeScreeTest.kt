@@ -40,7 +40,7 @@ class HomeScreeTest {
             )
         }
 
-        //Botones de tu app
+        //Botones de la app
         composeGetRule.onNodeWithText("Crear Producto").assertIsDisplayed()
         composeGetRule.onNodeWithText("Ver Productos").assertIsDisplayed()
         composeGetRule.onNodeWithText("Mi Perfil").assertIsDisplayed()

@@ -9,6 +9,7 @@ import com.example.proyecto.ui.screen.EditarPerfilScreen
 import com.example.proyecto.ui.screen.HomeScreen
 import com.example.proyecto.ui.screen.LoginScreen
 import com.example.proyecto.ui.screen.PerfilScreen
+import com.example.proyecto.ui.screen.PostScreen
 import com.example.proyecto.ui.screen.ProductosScreen
 import com.example.proyecto.ui.screen.RegistroProductoScreen
 import com.example.proyecto.ui.screen.RegistroScreen
@@ -55,5 +56,7 @@ fun AppNavigation() {
                 userNombre = userNombre
             )
         }
+        composable("posts") { PostScreen() }
+
     }
 }

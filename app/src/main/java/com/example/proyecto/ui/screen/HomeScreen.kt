@@ -137,6 +137,27 @@ fun HomeScreen(navController: NavController, userNombre: String? = null) {
                     )
                 }
             }
+            //tercera fila
+            Spacer(modifier = Modifier.height(20.dp))
+            //Segunda fila
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+
+                Box(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    BotonLevelUp(
+                        texto = "Post Api",
+                        onClickAccion = {
+                            navController.navigate("posts")
+                        }
+                    )
+                }
+
+            }
+
 
             //Boton Cerrar Sesion
             Spacer(modifier = Modifier.height(40.dp))
